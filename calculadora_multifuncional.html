@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Multifuncional</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f0f8ff, #e0ffff);
+      color: #333;
+      padding: 2rem;
+      margin: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #3b5998;
+    }
+    section {
+      margin-top: 2rem;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #3b5998;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2d4373;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #006400;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calculadora Multifuncional</h1>
+
+    <section>
+      <h2>Conversor de Dólar</h2>
+      <input type="number" id="valorUSD" placeholder="Valor em USD">
+      <button onclick="converterDolar()">Converter para BRL</button>
+      <div id="resultadoConversao" class="result"></div>
+    </section>
+
+    <section>
+      <h2>Calcular com Taxas e Juros</h2>
+      <input type="number" id="valorBase" placeholder="Valor Base">
+      <input type="number" id="taxa" placeholder="Taxa (%)">
+      <input type="number" id="juros" placeholder="Juros (%)">
+      <button onclick="calcularTaxasJuros()">Calcular</button>
+      <div id="resultadoTaxaJuros" class="result"></div>
+    </section>
+
+    <section>
+      <h2>Tabuada</h2>
+      <input type="number" id="numeroTabuada" placeholder="Digite um número">
+      <button onclick="gerarTabuada()">Gerar Tabuada</button>
+      <div id="resultadoTabuada" class="result"></div>
+    </section>
+  </div>
+
+  <script>
+    const apiKey = '5127914414b261ad7e39b670';
+
+    async function converterDolar() {
+      const valorUSD = parseFloat(document.getElementById('valorUSD').value);
+      const resultado = document.getElementById('resultadoConversao');
+      if (isNaN(valorUSD)) {
+        resultado.textContent = 'Digite um valor válido.';
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`);
+        const data = await response.json();
+        const taxaCambio = data.conversion_rates.BRL;
+        const valorBRL = (valorUSD * taxaCambio).toFixed(2);
+        resultado.textContent = `R$ ${valorBRL} (Taxa: ${taxaCambio})`;
+      } catch (error) {
+        resultado.textContent = 'Erro ao buscar taxa de câmbio.';
+      }
+    }
+
+    function calcularTaxasJuros() {
+      const valorBase = parseFloat(document.getElementById('valorBase').value);
+      const taxa = parseFloat(document.getElementById('taxa').value);
+      const juros = parseFloat(document.getElementById('juros').value);
+      const resultado = document.getElementById('resultadoTaxaJuros');
+
+      if (isNaN(valorBase) || isNaN(taxa) || isNaN(juros)) {
+        resultado.textContent = 'Preencha todos os campos corretamente.';
+        return;
+      }
+
+      const valorTaxa = valorBase * (taxa / 100);
+      const valorJuros = valorBase * (juros / 100);
+      const total = (valorBase + valorTaxa + valorJuros).toFixed(2);
+      resultado.textContent = `Total com Taxas e Juros: R$ ${total}`;
+    }
+
+    function gerarTabuada() {
+      const numero = parseInt(document.getElementById('numeroTabuada').value);
+      const resultado = document.getElementById('resultadoTabuada');
+
+      if (isNaN(numero)) {
+        resultado.textContent = 'Digite um número válido.';
+        return;
+      }
+
+      let tabuadaHTML = '';
+      for (let i = 1; i <= 10; i++) {
+        tabuadaHTML += `${numero} x ${i} = ${numero * i}<br>`;
+      }
+      resultado.innerHTML = tabuadaHTML;
+    }
+  </script>
+</body>
+</html>

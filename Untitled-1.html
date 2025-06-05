@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Sofisticada</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="calculator-screen-wrapper">
+                <input type="text" class="calculator-screen" value="0" disabled />
+            </div>
+
+            <div class="calculator-keys">
+                <!-- Linha 1 -->
+                <button type="button" class="all-clear function-key" value="all-clear">AC</button>
+                <button type="button" class="clear function-key" value="clear">C</button>
+                <button type="button" class="operator" value="/">&divide;</button>
+                <button type="button" class="operator" value="*">&times;</button>
+
+                <!-- Linha 2 -->
+                <button type="button" value="7">7</button>
+                <button type="button" value="8">8</button>
+                <button type="button" value="9">9</button>
+                <button type="button" class="operator" value="-">-</button>
+
+                <!-- Linha 3 -->
+                <button type="button" value="4">4</button>
+                <button type="button" value="5">5</button>
+                <button type="button" value="6">6</button>
+                <button type="button" class="operator" value="+">+</button>
+
+                <!-- Linha 4 -->
+                <button type="button" value="1">1</button>
+                <button type="button" value="2">2</button>
+                <button type="button" value="3">3</button>
+                <button type="button" class="equal-sign operator" value="=">=</button>
+
+                <!-- Linha 5 (estendida para 2 colunas para o 0 e decimal) -->
+                <button type="button" value="0" class="zero-button">0</button>
+                <button type="button" class="decimal" value=".">.</button>
+            </div>
+
+            <div class="extra-functions">
+                <button type="button" class="extra-function" value="juros">Juros</button>
+                <button type="button" class="extra-function" value="dolar">Dólar</button>
+                <button type="button" class="extra-function" value="tabuada">Tabuada</button>
+                <button type="button" class="extra-function" value="taxa">Taxa %</button>
+            </div>
+        </div>
+
+        <!-- Modais/Pop-ups para funções extras (inicialmente ocultos) -->
+        <div id="jurosModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Cálculo de Juros Simples</h3>
+                <label for="capital">Capital (C):</label><input type="number" id="capital" value="1000"><br>
+                <label for="taxa">Taxa Anual (%):</label><input type="number" id="taxa" value="5"><br>
+                <label for="tempo">Tempo (anos):</label><input type="number" id="tempo" value="2"><br>
+                <button id="calcJuros">Calcular</button>
+                <p id="jurosResult"></p>
+            </div>
+        </div>
+
+        <div id="dolarModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Conversor Dólar p/ BRL</h3>
+                <label for="valorDolar">Valor em Dólar (USD):</label><input type="number" id="valorDolar" value="100"><br>
+                <p>Cotação atual: R$ <span id="dolarCotacao">Carregando...</span></p>
+                <button id="convertDolar">Converter</button>
+                <p id="dolarResult"></p>
+            </div>
+        </div>
+
+        <div id="tabuadaModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Gerar Tabuada</h3>
+                <label for="tabuadaNumero">Número:</label><input type="number" id="tabuadaNumero" value="7"><br>
+                <button id="generateTabuadaBtn">Gerar</button>
+                <div id="tabuadaOutput" class="tabuada-output"></div>
+            </div>
+        </div>
+
+        <div id="taxaModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Cálculo de Taxa Percentual</h3>
+                <label for="valorInicial">Valor Inicial:</label><input type="number" id="valorInicial" value="100"><br>
+                <label for="valorFinal">Valor Final:</label><input type="number" id="valorFinal" value="120"><br>
+                <button id="calcTaxa">Calcular</button>
+                <p id="taxaResult"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

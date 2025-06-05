@@ -1,0 +1,348 @@
+/* Variáveis CSS para um tema jovem e vibrante */
+:root {
+    --bg-color: linear-gradient(135deg, #f0f8ff, #2c87b1); /* Fundo suave com gradiente azul claro */
+    --calculator-bg: #ffffff; /* Fundo branco puro para a calculadora */
+    --screen-bg: linear-gradient(to right, #34495e, #2c3e50); /* Azul escuro quase preto para a tela */
+    --screen-text-color: #ecf0f1; /* Texto branco-acinzentado na tela */
+
+    /* Cores dos botões de números e decimal */
+    --button-num-bg: #fdfefe; /* Quase branco */
+    --button-num-hover: #eaf2f8; /* Azul muito claro no hover */
+    --button-num-text: #5e2451; /* Azul escuro para o texto */
+
+    /* Cores dos operadores */
+    --operator-bg: linear-gradient(to top right, #ff7e5f, #feb47b); /* Laranja vibrante */
+    --operator-hover: #fa8231;
+    --operator-text: #ffffff;
+
+    /* Cor do botão de igual */
+    --equal-sign-bg: linear-gradient(to top right, #38ef7d, #11998e); /* Verde esmeralda vibrante */
+    --equal-sign-hover: #553647;
+
+    /* Cores dos botões de função (AC, C) */
+    --function-key-bg: linear-gradient(to top right, #e74c3c, #c0392b); /* Vermelho energizante */
+    --function-key-hover: #e84118;
+    --function-key-text: #ffffff;
+
+    /* Cores dos botões de funções extras */
+    --extra-function-bg: linear-gradient(to top right, #8e44ad, #9b59b6); /* Roxo elétrico */
+    --extra-function-hover: #a55eea;
+    --extra-function-text: #ffffff;
+
+    /* Outras cores de texto e sombra */
+    --text-color-dark: #2c3e50; /* Azul escuro para texto geral */
+    --text-color-light: #ffffff;
+    --shadow-light: 0 8px 15px rgba(0, 0, 0, 0.1);
+    --shadow-deep: 0 15px 30px rgba(0, 0, 0, 0.2);
+    --button-active-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra interna para efeito de clique */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg-color); /* Aplica o gradiente de fundo */
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color-dark);
+    overflow-x: hidden;
+}
+
+.calculator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* Aumento o espaçamento entre a calculadora e os modais */
+    padding: 35px;
+    background: var(--calculator-bg);
+    border-radius: 25px; /* Cantos mais arredondados */
+    box-shadow: var(--shadow-deep);
+    transition: all 0.3s ease-in-out; /* Transição suave para qualquer mudança de estado */
+}
+
+.calculator {
+    width: 340px; /* Levemente mais largo */
+    padding: 30px;
+    background: var(--calculator-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow-light);
+    animation: fadeInScale 0.5s ease-out; /* Animação de entrada */
+}
+
+/* Animação para a calculadora aparecer */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.calculator-screen-wrapper {
+    margin-bottom: 30px;
+    border-radius: 12px; /* Cantos mais arredondados */
+    overflow: hidden;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3); /* Sombra interna mais pronunciada */
+}
+
+.calculator-screen {
+    width: 100%;
+    height: 90px; /* Um pouco mais alto */
+    border: none;
+    background: var(--screen-bg);
+    color: var(--screen-text-color);
+    font-size: 3.5em; /* Fonte maior para melhor legibilidade */
+    text-align: right;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: 300;
+}
+
+.calculator-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px; /* Aumento o espaçamento entre os botões */
+}
+
+.calculator-keys button {
+    height: 75px; /* Botões um pouco mais altos */
+    font-size: 2em; /* Fonte maior para botões */
+    border: none;
+    border-radius: 12px; /* Cantos mais arredondados */
+    background-color: var(--button-num-bg);
+    color: var(--button-num-text);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais visível */
+    font-weight: 400;
+}
+
+.calculator-keys button:active {
+    transform: translateY(3px); /* Efeito de clique mais pronunciado */
+    box-shadow: var(--button-active-shadow);
+}
+
+.calculator-keys button:hover {
+    background-color: var(--button-num-hover);
+    transform: translateY(-3px); /* Pequeno lift mais perceptível */
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos específicos dos botões */
+.operator {
+    background: var(--operator-bg);
+    color: var(--operator-text);
+}
+
+.operator:hover {
+    background: var(--operator-hover);
+}
+
+.equal-sign {
+    background: var(--equal-sign-bg);
+    color: var(--equal-sign-text); /* Adicionado --equal-sign-text, se quiser uma cor diferente */
+    grid-row: span 2;
+    height: auto;
+    font-size: 2.2em; /* Botão de igual ainda maior */
+}
+
+.equal-sign:hover {
+    background: var(--equal-sign-hover);
+}
+
+.function-key {
+    background: var(--function-key-bg);
+    color: var(--function-key-text);
+    font-size: 1.4em; /* Fonte maior para AC/C */
+}
+
+.function-key:hover {
+    background: var(--function-key-hover);
+}
+
+.zero-button {
+    grid-column: span 2;
+}
+
+/* Seção de Funções Extras */
+.extra-functions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 12px; /* Espaçamento entre os botões extras */
+    margin-top: 25px;
+    width: 100%;
+}
+
+.extra-function {
+    height: 55px; /* Botões extras um pouco maiores */
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    background: var(--extra-function-bg);
+    color: var(--extra-function-text);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.extra-function:hover {
+    background: var(--extra-function-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2);
+}
+
+.extra-function:active {
+    transform: translateY(3px);
+    box-shadow: var(--button-active-shadow);
+}
+
+/* --- Estilos dos Modais (melhorados para o novo design) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100; /* Z-index alto para ficar por cima de tudo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Fundo mais escuro para destaque */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #db9595;
+    margin: auto;
+    padding: 40px; /* Padding maior */
+    border: none; /* Remove a borda */
+    width: 90%;
+    max-width: 450px; /* Largura máxima um pouco maior */
+    border-radius: 15px; /* Cantos mais arredondados */
+    box-shadow: var(--shadow-deep);
+    position: relative;
+    transform: translateY(-80px); /* Começa mais "acima" */
+    transition: transform 0.4s ease-out;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.close-button {
+    color: #666;
+    font-size: 32px; /* Maior e mais visível */
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--function-key-hover); /* Muda de cor no hover */
+    text-decoration: none;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: var(--operator-hover);
+    margin-bottom: 25px; /* Mais espaçamento */
+    text-align: center;
+    font-size: 1.8em; /* Título maior */
+    font-weight: 600;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color-dark);
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.modal-content input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 12px; /* Padding maior */
+    margin-bottom: 20px; /* Mais espaçamento */
+    border: 1px solid #bb6a6a; /* Borda mais suave */
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 1.1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-content input[type="number"]:focus {
+    border-color: var(--operator-hover); /* Borda colorida ao focar */
+    box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.2); /* Brilho suave */
+    outline: none;
+}
+
+.modal-content button {
+    display: block;
+    width: 100%;
+    padding: 15px 25px; /* Padding maior */
+    background: var(--equal-sign-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em; /* Fonte maior */
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-content button:hover {
+    background: var(--equal-sign-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content button:active {
+    transform: translateY(2px);
+    box-shadow: var(--button-active-shadow);
+}
+
+.modal-content p {
+    text-align: center;
+    margin-top: 25px; /* Mais espaçamento */
+    font-weight: 600;
+    color: var(--text-color-dark);
+    font-size: 1.1em;
+}
+
+.tabuada-output {
+    max-height: 200px; /* Altura máxima da tabuada */
+    overflow-y: auto;
+    border: 1px solid #dde1e5; /* Borda mais suave */
+    padding: 15px; /* Padding maior */
+    border-radius: 10px; /* Cantos arredondados */
+    background-color: #fdfdfd;
+    margin-top: 20px;
+    font-family: 'Consolas', 'Courier New', monospace; /* Fonte mais moderna para código */
+    font-size: 1em;
+    line-height: 1.6;
+    color: #444;
+}
+
+.tabuada-output p {
+    margin: 0;
+    padding: 3px 0;
+    text-align: left;
+}
